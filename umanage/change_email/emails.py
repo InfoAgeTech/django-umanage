@@ -2,10 +2,9 @@ from __future__ import unicode_literals
 
 from urllib.parse import urljoin
 
-from django.conf import settings
-from django.core.exceptions import ImproperlyConfigured
 from django.utils.translation import ugettext as _
 
+from ..utils.configuration import get_required_setting
 from ..utils.emails import umanage_send_email
 
 
@@ -46,16 +45,8 @@ def send_change_email_activation_email(to_user, change_email_obj,
 def _get_change_email_context(to_user, change_email_obj):
     """Common context for the change email flow."""
     context = {
-        # 'to_user': to_user,
-        'new_email': change_email_obj.new_email_address
+        'new_email': change_email_obj.new_email_address,
+        'site_root_uri': get_required_setting('SITE_ROOT_URI')
     }
-
-    try:
-        context['site_root_uri'] = getattr(settings, 'SITE_ROOT_URI')
-    except AttributeError as e:
-        raise ImproperlyConfigured(
-            _('No setting found for "SITE_ROOT_URI".  This is a '
-              'required setting for the django-umanage app in order to '
-              'send certain emails.'))
 
     return context

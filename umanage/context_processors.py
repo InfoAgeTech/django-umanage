@@ -1,13 +1,19 @@
+from __future__ import unicode_literals
+
 from django.conf import settings
+
+from umanage.utils.configuration import get_required_setting
 
 
 def template_name(request):
     """Common settings to put in context."""
-    # TODO: Probably want to throw a improperly configured error here if they
-    #       don't have this in settings
-    template_path = getattr(settings,
-                            'UMANAGE_BASE_TEMPLATE',
-                            'umanage/base_umanage.html')
+    template_path = get_required_setting('UMANAGE_BASE_TEMPLATE')
+
+    if not request.user.is_authenticated():
+        template_path = getattr(settings,
+                                'UMANAGE_BASE_UNAUTHENTICATED_TEMPLATE',
+                                template_path)
+
     return {
         'UMANAGE_BASE_TEMPLATE': template_path
     }

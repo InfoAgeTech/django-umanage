@@ -1,0 +1,13 @@
+{% extends 'umanage/base_umanage.html' %}
+{% load i18n umanage %}
+{% block page_title %}{% trans 'Username Sent' %} - {% endblock %}
+
+{% block breadcrumb %}
+    <li>{% trans 'Username Sent' %}</li>
+{% endblock %}
+
+{% block umanage_content %}
+<h1>{% trans 'Username Sent' %}</h1>
+<p>{% trans "You will receive an email shortly that will contain the username for the email address you provided." %}</p>
+
+{% endblock %}

@@ -4,6 +4,7 @@ import os
 
 from setuptools import find_packages
 from setuptools import setup
+from umanage import APP_URL
 
 
 classifiers = [
@@ -26,7 +27,7 @@ setup(
     long_description=README,
     author='Troy Grosfield',
     maintainer='Troy Grosfield',
-    url='https://github.com/infoagetech/django-umanage',
+    url=APP_URL,
     license='MIT',
     packages=find_packages(),
     include_package_data=True,
