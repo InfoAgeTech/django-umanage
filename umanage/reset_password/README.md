@@ -1,3 +1,0 @@
-Reset Password
-==============
-TODO
