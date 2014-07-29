@@ -23,16 +23,23 @@ class ChangeEmailView(LoginRequiredViewMixin, FormView):
         return form_kwargs
 
     def form_valid(self, form):
-        # TODO: send emails to current and new email addresses notifying them
-        #      of the change and providing the new email address a link to
-        #      activate the new email address
         form.send_email()
-        messages.success(self.request, _('Email sent with instructions on how '
-                                         'to activate your new email address.'))
         return super(ChangeEmailView, self).form_valid(form)
 
     def get_success_url(self):
-        return reverse('umanage_change_email')
+        return reverse('umanage_change_email_sent')
+
+
+class ChangeEmailSentView(LoginRequiredViewMixin, TemplateView):
+    """View that confirms an email will be sent to the user to update the
+    email address.
+    """
+    template_name = 'umanage/change_email/change_email_sent.html'
+
+
+class ChangeEmailSuccessView(LoginRequiredViewMixin, TemplateView):
+    """View that confirms an email has been updated successfully."""
+    template_name = 'umanage/change_email/change_email_success.html'
 
 
 class ChangeEmailActivationView(LoginRequiredViewMixin, TemplateView):
@@ -40,7 +47,6 @@ class ChangeEmailActivationView(LoginRequiredViewMixin, TemplateView):
     template_name = 'umanage/change_email/change_email_invalid.html'
 
     def get(self, request, *args, **kwargs):
-        # TODO: get the ChangeEmail object by id to verify and save change.
         change_email = ChangeEmail.objects.get_by_token_or_404(
             token=kwargs.get('change_email_token'),
             created_user=self.request.user
@@ -56,8 +62,4 @@ class ChangeEmailActivationView(LoginRequiredViewMixin, TemplateView):
 
         # Expire the change email token so it's no longer valid.
         change_email.expire()
-
-        msg = _('Email address confirmed and updated to {0}!'.format(
-                                             change_email.new_email_address))
-        messages.success(request, message=msg)
-        return redirect('umanage_change_email')
+        return redirect('umanage_change_email_success')

@@ -1,0 +1,14 @@
+{% extends 'umanage/base_umanage.html' %}
+{% load i18n umanage %}
+{% block page_title %}{% trans 'Email Update Success' %} - {% endblock %}
+
+{% block breadcrumb %}
+    <li>{% trans 'Email Update Success' %}</li>
+{% endblock %}
+
+{% block umanage_content %}
+<h1>{% trans 'Email Update Success' %}</h1>
+
+<p>{% trans "Your email address has been successfully updated!" %}</p>
+
+{% endblock %}

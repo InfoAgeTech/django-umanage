@@ -26,8 +26,6 @@ def umanage_send_email(to_user, subject, markdown_template=None,
 
     context = _get_email_context(context)
     context['to_user'] = to_user
-    # context['MEDIA_URL'] = settings.MEDIA_URL
-    # context['SITE_ROOT_URI'] = settings.SITE_ROOT_URI
 
     base_html_template = getattr(settings,
                                  'UMANAGE_BASE_HTML_TEMPLATE',

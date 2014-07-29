@@ -13,8 +13,8 @@ User management app for django.  This app solves the following workflows:
 
 Dependencies
 ============
-* django-core
-* markdown - used for email template conversion so the emails have to be written only once without having to maintain a .txt and .html version.  The markdown version is the email version.
+* [django-core](https://github.com/InfoAgeTech/django-core) - provides a number of django related helpful utilities
+* [markdown](https://github.com/waylan/Python-Markdown) - used for email template conversion so the emails have to be written only once without having to maintain a .txt and .html version.  The markdown version is the email version.
 
 Installation
 ============

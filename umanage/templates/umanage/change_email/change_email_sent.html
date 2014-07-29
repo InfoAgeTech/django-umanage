@@ -1,0 +1,14 @@
+{% extends 'umanage/base_umanage.html' %}
+{% load i18n umanage %}
+{% block page_title %}{% trans 'Change Email Sent' %} - {% endblock %}
+
+{% block breadcrumb %}
+    <li>{% trans 'Change Email Sent' %}</li>
+{% endblock %}
+
+{% block umanage_content %}
+<h1>{% trans 'Change Email Sent' %}</h1>
+
+<p>{% trans "An email will be sent to you shortly with instructions on how to activate your new email address." %}</p>
+
+{% endblock %}
