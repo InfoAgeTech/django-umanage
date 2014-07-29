@@ -7,8 +7,8 @@ User management app for django.  This app solves the following workflows:
 * [change password](./umanage/change_password)
 * reset password
 * [change email address](./umanage/change_email)
-* forgot username
-* forgot password
+* [forgot username](./umanage/forgot_username)
+* [forgot password](./umanage/forgot_password)
 
 
 Dependencies
@@ -39,4 +39,4 @@ DOC TODOS
 
 Tests
 =====
-TODO: explain how to run tests
+TODO: write tests and explain how to run them
