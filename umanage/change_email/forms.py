@@ -20,12 +20,12 @@ class ChangeEmailForm(UserAuthorizationRequiredForm):
     new_email = forms.EmailField(label=_('New Email'))
     new_email_confirm = forms.EmailField(label=_('New Email Confirm'))
 
-    class Meta:
-        fields = ('current_email', 'password', 'new_email',
-                  'new_email_confirm')
-
-    def __int__(self, *args, **kwargs):
+    def __init__(self, *args, **kwargs):
         super(ChangeEmailForm, self).__init__(*args, **kwargs)
+
+        if 'current_email' not in self.initial:
+            self.initial['current_email'] = self.user.email
+
         self.fields.keyOrder = ('current_email', 'password', 'new_email',
                                 'new_email_confirm')
 
@@ -44,12 +44,15 @@ class ChangeEmailForm(UserAuthorizationRequiredForm):
     def send_email(self):
         """Sends the necessary emails and returns the ChangeEmail object."""
         change_email = ChangeEmail.objects.create(
-            new_email_address=self.cleaned_data.get('new_email_address'),
+            new_email_address=self.cleaned_data.get('new_email'),
             created_user=self.user
         )
-        send_change_email_notice_email(to_user=self.request.user)
+        send_change_email_notice_email(
+            to_user=self.user,
+            change_email_obj=change_email
+        )
         send_change_email_activation_email(
-            to_user=self.request.user,
-            change_email=change_email
+            to_user=self.user,
+            change_email_obj=change_email
         )
         return change_email

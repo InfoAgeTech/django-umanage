@@ -1,22 +1,22 @@
 {% extends 'umanage/base_umanage.html' %}
 {% load i18n umanage %}
-{% block page_title %}Change Email Address - {% endblock %}
+{% block page_title %}{% trans 'Change Email Address' %} - {% endblock %}
 
 {% block breadcrumb %}
-    <li>Change Email Address</li>
+    <li>{% trans 'Change Email Address' %}</li>
 {% endblock %}
 
 {% block umanage_content %}
-<h1>Change Email Address</h1>
+<h1>{% trans 'Change Email Address' %}</h1>
 
 <p>{% trans "Please enter your password, for security's sake, and then enter your new email address." %}</p>
 
-<form method="post" action="{% url 'umanage_change_password' %}" class="form-horizontal">
+<form method="post" action="{% url 'umanage_change_email' %}" class="form-horizontal">
     {% csrf_token %}
     {{ form|render_umanage_form }}
     <div class="form-group">
         <div class="col-sm-offset-2 col-sm-10">
-            <button type="submit" class="btn btn-primary">Save</button>
+            <button type="submit" class="btn btn-primary">Change Email</button>
             <a href="#">cancel</a>
         </div>
     </div>

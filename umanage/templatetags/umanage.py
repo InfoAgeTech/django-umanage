@@ -1,11 +1,11 @@
 from __future__ import unicode_literals
 
 from django.template import Library
-from django.template.loader import render_to_string
 from django_core.utils.loading import get_function_from_settings
 
 
 register = Library()
+
 
 @register.filter
 def render_umanage_form(form):

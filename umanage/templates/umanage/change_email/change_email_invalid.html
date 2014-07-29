@@ -1,0 +1,16 @@
+{% extends 'umanage/base_umanage.html' %}
+{% load i18n umanage %}
+{% block page_title %}{% trans 'Change Email Invalid' %}  - {% endblock %}
+
+{% block breadcrumb %}
+    <li>{% trans 'Change Email Invalid' %}</li>
+{% endblock %}
+
+{% block umanage_content %}
+<h1>{% trans 'Change Email Invalid' %}</h1>
+<p>{% trans 'The change email token is invalid for 1 of 2 reasons:' %}</p>
+<ol>
+    <li>{% trans 'The email has already been successfully activated' %}</li>
+    <li>{% trans 'The change email token has expired.  If this is the case, please go through the change email process again.' %}</li>
+</ol>
+{% endblock %}

@@ -14,6 +14,7 @@ User management app for django.  This app solves the following workflows:
 Dependencies
 ============
 * django-core
+* markdown - used for email template conversion so the emails have to be written only once without having to maintain a .txt and .html version.  The markdown version is the email version.
 
 Installation
 ============
@@ -29,3 +30,6 @@ DOC TODOS
 * adding to urls.py
 * add "UMANAGE_FROM_EMAIL" in settings.py
 * SITE_ROOT_URI setting in settings.py
+* SITE_NAME setting in settings.py
+* python markdown dependency for emails
+* UMANAGE_BASE_HTML_TEMPLATE for overriding the base html template
