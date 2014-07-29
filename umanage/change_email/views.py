@@ -5,8 +5,9 @@ from django.shortcuts import redirect
 from django.views.generic.base import TemplateView
 from django.views.generic.edit import FormView
 from django_core.views.mixins.auth import LoginRequiredViewMixin
-from umanage.change_email.forms import ChangeEmailForm
-from umanage.models import ChangeEmail
+
+from ..models import ChangeEmailAuthorization
+from .forms import ChangeEmailForm
 
 
 class ChangeEmailView(LoginRequiredViewMixin, FormView):
@@ -42,15 +43,15 @@ class ChangeEmailSuccessView(LoginRequiredViewMixin, TemplateView):
 
 class ChangeEmailActivationView(LoginRequiredViewMixin, TemplateView):
 
-    template_name = 'umanage/change_email/change_email_invalid.html'
+    template_name = 'umanage/change_email/change_email_expired.html'
 
     def get(self, request, *args, **kwargs):
-        change_email = ChangeEmail.objects.get_by_token_or_404(
+        change_email = ChangeEmailAuthorization.objects.get_by_token_or_404(
             token=kwargs.get('change_email_token'),
             created_user=self.request.user
         )
 
-        if not change_email.is_valid():
+        if change_email.is_expired():
             return super(ChangeEmailActivationView, self).get(request, *args,
                                                               **kwargs)
 

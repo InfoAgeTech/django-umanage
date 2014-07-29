@@ -1,12 +1,9 @@
 from __future__ import unicode_literals
 
 from django.contrib import messages
-# from django.contrib.auth import update_session_auth_hash
 from django.contrib.auth.forms import PasswordChangeForm
-from django.contrib.auth.forms import PasswordResetForm
 from django.core.urlresolvers import reverse
 from django.utils.translation import ugettext as _
-from django.views.generic.base import TemplateView
 from django.views.generic.edit import FormView
 from django_core.views.mixins.auth import LoginRequiredViewMixin
 

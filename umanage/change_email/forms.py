@@ -6,7 +6,7 @@ from django_core.forms.mixins.users import UserAuthorizationRequiredForm
 from django_core.forms.widgets import ReadonlyWidget
 from umanage.change_email.emails import send_change_email_activation_email
 from umanage.change_email.emails import send_change_email_notice_email
-from umanage.models import ChangeEmail
+from umanage.models import ChangeEmailAuthorization
 
 
 class ChangeEmailForm(UserAuthorizationRequiredForm):
@@ -43,16 +43,16 @@ class ChangeEmailForm(UserAuthorizationRequiredForm):
 
     def send_email(self):
         """Sends the necessary emails and returns the ChangeEmail object."""
-        change_email = ChangeEmail.objects.create(
+        authorization = ChangeEmailAuthorization.objects.create(
             new_email_address=self.cleaned_data.get('new_email'),
             created_user=self.user
         )
         send_change_email_notice_email(
             to_user=self.user,
-            change_email_obj=change_email
+            authorization=authorization
         )
         send_change_email_activation_email(
             to_user=self.user,
-            change_email_obj=change_email
+            authorization=authorization
         )
-        return change_email
+        return authorization

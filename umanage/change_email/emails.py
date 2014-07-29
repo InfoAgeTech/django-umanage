@@ -8,13 +8,14 @@ from ..utils.configuration import get_required_setting
 from ..utils.emails import umanage_send_email
 
 
-def send_change_email_notice_email(to_user, change_email_obj,
+def send_change_email_notice_email(to_user,
+                                   authorization,
                                    markdown_template='umanage/emails/change_email_requested.md',
                                    **kwargs):
     """Sends an email to a user alerting them that their email has been
     requested to change.
     """
-    context = _get_change_email_context(to_user, change_email_obj)
+    context = _get_change_email_context(to_user, authorization)
     return umanage_send_email(
         to_user=to_user,
         subject=_('Email Change Requested'),
@@ -23,15 +24,16 @@ def send_change_email_notice_email(to_user, change_email_obj,
         **kwargs)
 
 
-def send_change_email_activation_email(to_user, change_email_obj,
+def send_change_email_activation_email(to_user,
+                                       authorization,
                                        markdown_template='umanage/emails/change_email_activation.md',
                                        **kwargs):
     """Sends an email to the address of the newly provided email for
     activation.
     """
-    context = _get_change_email_context(to_user, change_email_obj)
+    context = _get_change_email_context(to_user, authorization)
     url = urljoin(context.get('site_root_uri'),
-                  change_email_obj.get_absolute_url())
+                  authorization.get_absolute_url())
     context['umanage_change_email_activation_url'] = url
 
     return umanage_send_email(
@@ -42,10 +44,10 @@ def send_change_email_activation_email(to_user, change_email_obj,
         **kwargs)
 
 
-def _get_change_email_context(to_user, change_email_obj):
+def _get_change_email_context(to_user, authorization):
     """Common context for the change email flow."""
     context = {
-        'new_email': change_email_obj.new_email_address,
+        'new_email': authorization.new_email_address,
         'site_root_uri': get_required_setting('SITE_ROOT_URI')
     }
 

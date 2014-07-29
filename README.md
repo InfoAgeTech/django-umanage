@@ -35,7 +35,7 @@ DOC TODOS
 * python markdown dependency for emails
 * UMANAGE_BASE_HTML_TEMPLATE for overriding the base html template
 * UMANAGE_BASE_UNAUTHENTICATED_TEMPLATE setting for using the unauthenticated template (defaults to UMANAGE_BASE_TEMPLATE if it doesn't exist)
-* forgot username url configuration ``url()``
+* forgot username url configuration
 
 Tests
 =====
