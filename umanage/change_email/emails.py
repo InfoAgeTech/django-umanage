@@ -53,7 +53,7 @@ def _get_change_email_context(to_user, authorization):
     """Common context for the change email flow."""
     context = {
         'new_email': authorization.new_email_address,
-        'site_root_uri': get_required_setting('SITE_ROOT_URI')
+        'site_root_uri': get_required_setting('UMANAGE_SITE_ROOT_URI')
     }
 
     return context

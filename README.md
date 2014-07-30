@@ -78,19 +78,28 @@ Configuration
 
         UMANAGE_FORM_RENDERER = 'bootstrapform.templatetags.bootstrap.bootstrap'
 
+7. ``UMANAGE_SITE_NAME``: required setting that is used as the signature as well as other places that refer to your site's name.
 
+        UMANAGE_SITE_NAME = 'My Awesome Site'
 
+8. ``UMANAGE_SITE_ROOT_URI``: required setting that is the root site uri for you site.  This is used to construct urls in emails that will link back to your site.
 
+        UMANAGE_SITE_ROOT_URI = 'http://thisismydomain.com/'
 
-DOC TODOS
-=========
-* UMANAGE_BASE_TEMPLATE setting
-* form rendering configuration
-* adding to urls.py
-* add "UMANAGE_FROM_EMAIL" in settings.py
-* SITE_ROOT_URI setting in settings.py
-* SITE_NAME setting in settings.py
-* UMANAGE_BASE_HTML_TEMPLATE for overriding the base html template
-* UMANAGE_BASE_UNAUTHENTICATED_TEMPLATE setting for using the unauthenticated template (defaults to UMANAGE_BASE_TEMPLATE if it doesn't exist)
-* forgot username url configuration
+9. ``urls.py``: Add desired urls to your ``urls.py`` file.   This app was designed so apps can inherit pieces of functionality or all functionality.  This was the reason that each use workflow has it's own folder. If all urls (workflows) are wanted, then add the following to your urls.py:
 
+        urlpatterns = patterns('',
+            url(r'', include('umanage.forgot_username.urls')),
+            url(r'', include('umanage.forgot_password.urls')),
+            url(r'^account', include('umanage.urls')),
+        )
+        
+        # If that urls.py were expanded it could look something like
+        urlpatterns = patterns('',
+            url(r'', include('umanage.forgot_username.urls')),
+            url(r'', include('umanage.forgot_password.urls')),
+            url(r'^account', include('umanage.activate_account.urls')),
+            url(r'^account', include('umanage.change_email.urls')),
+            url(r'^account', include('umanage.change_password.urls')),
+            url(r'^account/token-expired/?$', TokenExpiredView.as_view(), name='umanage_token_expired'),
+        )

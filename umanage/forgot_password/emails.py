@@ -44,7 +44,7 @@ def send_forgot_password_email(to_user,
 def _get_forgot_password_context(to_user):
     """Common context for the forgot password flow."""
     context = {
-        'site_root_uri': get_required_setting('SITE_ROOT_URI')
+        'site_root_uri': get_required_setting('UMANAGE_SITE_ROOT_URI')
     }
 
     return context

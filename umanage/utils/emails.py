@@ -51,6 +51,6 @@ def _get_email_context(context=None):
     if not context:
         context = {}
 
-    context['site_root_uri'] = get_required_setting('SITE_ROOT_URI')
-    context['site_name'] = get_required_setting('SITE_NAME')
+    context['site_root_uri'] = get_required_setting('UMANAGE_SITE_ROOT_URI')
+    context['site_name'] = get_required_setting('UMANAGE_SITE_NAME')
     return context
