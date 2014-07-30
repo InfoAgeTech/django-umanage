@@ -1,6 +1,11 @@
 from __future__ import unicode_literals
 
-from urllib.parse import urljoin
+try:
+    # python 2
+    from urlparse import urljoin
+except ImportError:
+    # python 3
+    from urllib.parse import urljoin
 
 from django.utils.translation import ugettext as _
 
