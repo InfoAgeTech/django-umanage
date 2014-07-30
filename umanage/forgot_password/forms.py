@@ -2,11 +2,14 @@ from __future__ import unicode_literals
 
 from django import forms
 from django.contrib.auth import get_user_model
+from django.contrib.auth.forms import SetPasswordForm
 from django.core.exceptions import ValidationError
 from django.utils.translation import ugettext as _
 from django_core.utils.validators import is_valid_email
-from umanage.forgot_password.emails import send_forgot_password_email
-from umanage.models import ForgotPasswordAuthorization
+from django_core.utils.validators import validate_password_strength
+
+from ..models import ForgotPasswordAuthorization
+from .emails import send_forgot_password_email
 
 
 User = get_user_model()
@@ -40,3 +43,13 @@ class ForgotPasswordForm(forms.Form):
         )
         send_forgot_password_email(to_user=self.user,
                                    authorization=authorization)
+
+
+class UManageSetPasswordForm(SetPasswordForm):
+
+    def __init__(self, *args, **kwargs):
+        super(UManageSetPasswordForm, self).__init__(*args, **kwargs)
+        self.fields['new_password1'].validators.append(validate_password_strength)
+
+#     def clean_new_password1(self):
+#         new_password =

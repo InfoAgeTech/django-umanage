@@ -1,7 +1,6 @@
 from __future__ import unicode_literals
 
 from django.contrib.auth import get_user_model
-from django.contrib.auth.forms import SetPasswordForm
 from django.core.urlresolvers import reverse
 from django.http.response import Http404
 from django.shortcuts import redirect
@@ -11,6 +10,7 @@ from django.views.generic.edit import FormView
 from ..mixins.views import AuthorizationTokenRequiredViewMixin
 from ..models import ForgotPasswordAuthorization
 from .forms import ForgotPasswordForm
+from .forms import UManageSetPasswordForm
 
 
 User = get_user_model()
@@ -45,10 +45,13 @@ class ForgotPasswordChangePasswordView(AuthorizationTokenRequiredViewMixin,
                                        FormView):
 
     template_name = 'umanage/forgot_password/forgot_password_change_password.html'
-    form_class = SetPasswordForm
+    form_class = UManageSetPasswordForm
     authorization_class = ForgotPasswordAuthorization
 
     def get_authorization_user(self):
+        if self.authorization_user is not None:
+            return self.authorization_user
+
         try:
             user = User.objects.get(username=self.kwargs.get('username'))
         except User.DoesNotExist as e:
@@ -63,7 +66,7 @@ class ForgotPasswordChangePasswordView(AuthorizationTokenRequiredViewMixin,
     def get_form_kwargs(self):
         kwargs = super(ForgotPasswordChangePasswordView,
                        self).get_form_kwargs()
-        kwargs['user'] = self.token_user
+        kwargs['user'] = self.get_authorization_user()
         return kwargs
 
     def form_valid(self, form):
