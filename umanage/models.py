@@ -1,8 +1,8 @@
 from __future__ import unicode_literals
 
 from datetime import datetime
+from datetime import timedelta
 
-from dateutil.relativedelta import relativedelta
 from django.core.urlresolvers import reverse
 from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
@@ -21,7 +21,7 @@ class TokenAuthorization(AbstractTokenModel, AbstractBaseModel):
 
         if not self.expires:
             # token is valid for 24 hours if not set
-            self.expires = datetime.utcnow() + relativedelta(
+            self.expires = datetime.utcnow() + timedelta(
                 days=1
             )
 
