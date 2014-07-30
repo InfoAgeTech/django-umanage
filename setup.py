@@ -34,6 +34,7 @@ setup(
     zip_safe=False,
     setup_requires=[
         'django >= 1.5.8',
+        'markdown'
     ],
     test_suite='nose.collector',
     tests_require=[
