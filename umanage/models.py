@@ -21,9 +21,7 @@ class TokenAuthorization(AbstractTokenModel, AbstractBaseModel):
 
         if not self.expires:
             # token is valid for 24 hours if not set
-            self.expires = datetime.utcnow() + timedelta(
-                days=1
-            )
+            self.expires = datetime.utcnow() + timedelta(days=1)
 
         super(TokenAuthorization, self).save(*args, **kwargs)
 
