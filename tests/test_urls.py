@@ -27,7 +27,7 @@ UNAUTHENTICATED_URL_NAMES = [
 ]
 
 
-class UmanageAuthenticatedUrlTests(UrlTestCaseMixin, AuthenticatedUserTestCase):
+class UManageAuthenticatedUrlTests(UrlTestCaseMixin, AuthenticatedUserTestCase):
     """Test case for ensuring all authenticated umanage urls return a correct
     response.
     """
@@ -113,6 +113,13 @@ class UmanageAuthenticatedUrlTests(UrlTestCaseMixin, AuthenticatedUserTestCase):
         """Test the change password url to ensure it renders correctly."""
         self.response_test_get(
             url=reverse('umanage_change_password')
+        )
+
+    def test_umanage_change_password_success_view(self):
+        """Test the change password success url to ensure it renders correctly.
+        """
+        self.response_test_get(
+            url=reverse('umanage_change_password_success')
         )
 
     def test_umanage_activate_account_view(self):
