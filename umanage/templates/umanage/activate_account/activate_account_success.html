@@ -1,0 +1,14 @@
+{% extends 'umanage/base_umanage.html' %}
+{% load i18n umanage %}
+{% block page_title %}{% trans 'Account Activated' %} - {% endblock %}
+
+{% block breadcrumb %}
+    <li>{% trans 'Account Activated' %}</li>
+{% endblock %}
+
+{% block umanage_content %}
+<h1>{% trans 'Account Activated' %}</h1>
+<p>{% trans "Your account has been successfully activated!" %}</p>
+<p><a href="/">continue to home</a></p>
+
+{% endblock %}

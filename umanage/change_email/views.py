@@ -3,9 +3,11 @@ from __future__ import unicode_literals
 from django.core.urlresolvers import reverse
 from django.shortcuts import redirect
 from django.views.generic.base import TemplateView
+from django.views.generic.base import View
 from django.views.generic.edit import FormView
 from django_core.views.mixins.auth import LoginRequiredViewMixin
 
+from ..mixins.views import AuthorizationTokenRequiredViewMixin
 from ..models import ChangeEmailAuthorization
 from .forms import ChangeEmailForm
 
@@ -41,24 +43,22 @@ class ChangeEmailSuccessView(LoginRequiredViewMixin, TemplateView):
     template_name = 'umanage/change_email/change_email_success.html'
 
 
-class ChangeEmailActivationView(LoginRequiredViewMixin, TemplateView):
+class ChangeEmailActivationView(LoginRequiredViewMixin,
+                                AuthorizationTokenRequiredViewMixin, View):
 
-    template_name = 'umanage/change_email/change_email_expired.html'
+    authorization_class = ChangeEmailAuthorization
 
     def get(self, request, *args, **kwargs):
-        change_email = ChangeEmailAuthorization.objects.get_by_token_or_404(
-            token=kwargs.get('change_email_token'),
-            created_user=self.request.user
-        )
-
-        if change_email.is_expired():
-            return super(ChangeEmailActivationView, self).get(request, *args,
-                                                              **kwargs)
 
         # It's a valid change email object, update the user's email
-        self.request.user.email = change_email.new_email_address
+        self.request.user.email = self.authorization.new_email_address
         self.request.user.save()
 
         # Expire the change email token so it's no longer valid.
-        change_email.expire()
+        self.authorization.expire()
         return redirect('umanage_change_email_success')
+
+
+class ChangeEmailExpiredView(LoginRequiredViewMixin, TemplateView):
+
+    template_name = 'umanage/change_email/change_email_expired.html'

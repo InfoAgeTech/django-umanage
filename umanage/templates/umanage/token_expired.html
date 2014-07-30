@@ -1,0 +1,13 @@
+{% extends 'umanage/base_umanage.html' %}
+{% load i18n umanage %}
+{% block page_title %}{% trans 'Token Expired' %}  - {% endblock %}
+
+{% block breadcrumb %}
+    <li>{% trans 'Token Expired' %}</li>
+{% endblock %}
+
+{% block umanage_content %}
+<h1>{% trans 'Token Expired' %}</h1>
+<p>{% trans 'This token has expired.' %}</p>
+
+{% endblock %}

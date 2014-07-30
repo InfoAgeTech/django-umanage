@@ -1,0 +1,16 @@
+{% extends 'umanage/base_umanage.html' %}
+{% load i18n umanage %}
+{% block page_title %}{% trans 'Activate Account Expired' %} - {% endblock %}
+
+{% block breadcrumb %}
+    <li>{% trans 'Activate Account Expired' %}</li>
+{% endblock %}
+
+{% block umanage_content %}
+<h1>{% trans 'Activate Account Expired' %}</h1>
+<p>{% trans 'The activate account token has expired for 1 of 2 reasons:' %}</p>
+<ol>
+    <li>{% trans 'The account has already been successfully activated' %}</li>
+    <li>{% trans 'The token has been out beyond the allotted time' %}</li>
+</ol>
+{% endblock %}

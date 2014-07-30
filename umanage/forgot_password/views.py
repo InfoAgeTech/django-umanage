@@ -8,6 +8,7 @@ from django.shortcuts import redirect
 from django.views.generic.base import TemplateView
 from django.views.generic.edit import FormView
 
+from ..mixins.views import AuthorizationTokenRequiredViewMixin
 from ..models import ForgotPasswordAuthorization
 from .forms import ForgotPasswordForm
 
@@ -40,28 +41,24 @@ class ForgotPasswordSentView(TemplateView):
     template_name = 'umanage/forgot_password/forgot_password_sent.html'
 
 
-class ForgotPasswordChangePasswordView(FormView):
+class ForgotPasswordChangePasswordView(AuthorizationTokenRequiredViewMixin,
+                                       FormView):
 
     template_name = 'umanage/forgot_password/forgot_password_change_password.html'
     form_class = SetPasswordForm
+    authorization_class = ForgotPasswordAuthorization
 
-    def dispatch(self, request, *args, **kwargs):
+    def get_authorization_user(self):
         try:
-            self.token_user = User.objects.get(username=kwargs.get('username'))
+            user = User.objects.get(username=self.kwargs.get('username'))
         except User.DoesNotExist as e:
             raise Http404
 
-        self.authorization = ForgotPasswordAuthorization.objects.get_by_token_or_404(
-            token=kwargs.get('forgot_password_token'),
-            created_user=self.token_user
-        )
+        self.authorization_user = user
+        return user
 
-        if self.authorization.is_expired():
-            return redirect('umanage_forgot_password_expired')
-
-        return super(ForgotPasswordChangePasswordView, self).dispatch(request,
-                                                                      *args,
-                                                                      **kwargs)
+    def get_auth_expired_url(self):
+        return reverse('umanage_forgot_password_expired')
 
     def get_form_kwargs(self):
         kwargs = super(ForgotPasswordChangePasswordView,

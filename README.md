@@ -1,9 +1,9 @@
 django-umanage
 ==============
 
-User management app for django.  This app solves the following workflows:
+User management app for django.  This app solves the following user related workflows:
 
-* account activation
+* [account activation](./umanage/activate_account)
 * [change password](./umanage/change_password)
 * [change email address](./umanage/change_email)
 * [forgot username](./umanage/forgot_username)

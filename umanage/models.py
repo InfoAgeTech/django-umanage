@@ -41,6 +41,19 @@ class TokenAuthorization(AbstractTokenModel, AbstractBaseModel):
         self.save()
 
 
+@python_2_unicode_compatible
+class AccountActivationAuthorization(TokenAuthorization):
+    """Model that handles the account authorization flow."""
+
+    class Meta:
+        proxy = True
+
+    def get_absolute_url(self):
+        args = [self.created_user.username, self.token]
+        return reverse('umanage_activate_account', args=args)
+
+
+@python_2_unicode_compatible
 class ChangeEmailAuthorization(TokenAuthorization):
     """Model that handles the change email flow."""
 
@@ -51,6 +64,7 @@ class ChangeEmailAuthorization(TokenAuthorization):
         return reverse('umanage_change_email_activation', args=[self.token])
 
 
+@python_2_unicode_compatible
 class ForgotPasswordAuthorization(TokenAuthorization):
     """Model that handles the forgot password flow."""
 
