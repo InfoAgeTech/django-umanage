@@ -24,7 +24,7 @@ Installation
 DOC TODOS
 =========
 * add to installed apps
-* context_processors
+* context_processors ``umanage.context_processors.template_name``
 * UMANAGE_BASE_TEMPLATE setting
 * form rendering configuration
 * adding to urls.py
