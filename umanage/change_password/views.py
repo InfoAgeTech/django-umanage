@@ -1,19 +1,17 @@
 from __future__ import unicode_literals
 
-from django.contrib import messages
-from django.contrib.auth.forms import PasswordChangeForm
 from django.core.urlresolvers import reverse
-from django.utils.translation import ugettext as _
+from django.views.generic.base import TemplateView
 from django.views.generic.edit import FormView
 from django_core.views.mixins.auth import LoginRequiredViewMixin
-from django.views.generic.base import TemplateView
+from umanage.change_password.forms import UManagePasswordChangeForm
 
 
 class ChangePasswordView(LoginRequiredViewMixin, FormView):
     """View for changing a user's password."""
 
     template_name = 'umanage/change_password/change_password.html'
-    form_class = PasswordChangeForm
+    form_class = UManagePasswordChangeForm
 
     def get_form_kwargs(self):
         form_kwargs = super(ChangePasswordView, self).get_form_kwargs()

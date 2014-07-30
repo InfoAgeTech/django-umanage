@@ -50,6 +50,3 @@ class UManageSetPasswordForm(SetPasswordForm):
     def __init__(self, *args, **kwargs):
         super(UManageSetPasswordForm, self).__init__(*args, **kwargs)
         self.fields['new_password1'].validators.append(validate_password_strength)
-
-#     def clean_new_password1(self):
-#         new_password =
