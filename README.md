@@ -1,7 +1,8 @@
-.. image:: https://travis-ci.org/InfoAgeTech/django-umanage.png?branch=master
-    :target: http://travis-ci.org/InfoAgeTech/django-umanage
-.. image:: https://coveralls.io/repos/InfoAgeTech/django-umanage/badge.png
-    :target: https://coveralls.io/r/InfoAgeTech/django-umanage
+[<img src="https://travis-ci.org/InfoAgeTech/django-umanage.png?branch=master">](http://travis-ci.org/InfoAgeTech/django-umanage)
+[<img src="https://coveralls.io/repos/InfoAgeTech/django-umanage/badge.png">](https://coveralls.io/r/InfoAgeTech/django-umanage)
+[<img src="https://badge.fury.io/py/django-core.png">](http://badge.fury.io/py/django-core)
+[<img src="https://pypip.in/license/django-core/badge.png">](https://github.com/InfoAgeTech/django-core/blob/master/LICENSE)
+
 
 django-umanage
 ==============
