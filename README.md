@@ -1,3 +1,8 @@
+.. image:: https://travis-ci.org/InfoAgeTech/django-umanage.png?branch=master
+    :target: http://travis-ci.org/InfoAgeTech/django-umanage
+.. image:: https://coveralls.io/repos/InfoAgeTech/django-umanage/badge.png
+    :target: https://coveralls.io/r/InfoAgeTech/django-umanage
+
 django-umanage
 ==============
 
