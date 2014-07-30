@@ -46,7 +46,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
     'django.core.context_processors.request',
     'django.core.context_processors.media',
     'django.contrib.auth.context_processors.auth',
-    'umanage.context_processors.template_name',
+    'umanage.context_processors.common',
 )
 
 SITE_ROOT = os.path.join(os.path.dirname(os.path.realpath(__file__)), '../')

@@ -44,6 +44,15 @@ Configuration
             ...
         )
 
+3. ``UMANAGE_FROM_EMAIL`` required setting is used when sending emails to users.  An example would be something like:
+
+        UMANAGE_FROM_EMAIL = 'noreply@mysitedomain.com'
+
+4. ``UMANAGE_FORM_RENDERER`` optional settings allows your app to defined a location to a function that renders forms.  It can be any function that requires a single argument, the form object to render.  This defaults to calling django ``as_table()`` form rendering function.  For example, let's say I want to render forms using the 
+
+        UMANAGE_FORM_RENDERER = 'bootstrapform.templatetags.bootstrap.bootstrap_horizontal'
+
+
 
 
 
