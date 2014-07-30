@@ -3,7 +3,8 @@
 
 [run]
 omit = */*urls.py,*__init__.py
-include = */umanage/*
+source = 
+    umanage
 
 [report]
 # Regexes for lines to exclude from consideration
