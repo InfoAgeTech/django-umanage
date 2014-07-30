@@ -26,22 +26,36 @@ Installation
 
     pip install django-umanage
 
+Configuration
+=============
+1. Add to ``INSTALLED_APPS`` in your ``settings.py``:
+
+        INSTALLED_APPS = (
+            ...
+            'umanage',
+            ...
+        )
+
+2. Add context processor to the ``TEMPLATE_CONTEXT_PROCESSORS`` in ``settings.py``:
+
+        TEMPLATE_CONTEXT_PROCESSORS = (
+            ...
+            'umanage.context_processors.common',
+            ...
+        )
+
+
+
 
 DOC TODOS
 =========
-* add to installed apps
-* context_processors ``umanage.context_processors.template_name``
 * UMANAGE_BASE_TEMPLATE setting
 * form rendering configuration
 * adding to urls.py
 * add "UMANAGE_FROM_EMAIL" in settings.py
 * SITE_ROOT_URI setting in settings.py
 * SITE_NAME setting in settings.py
-* python markdown dependency for emails
 * UMANAGE_BASE_HTML_TEMPLATE for overriding the base html template
 * UMANAGE_BASE_UNAUTHENTICATED_TEMPLATE setting for using the unauthenticated template (defaults to UMANAGE_BASE_TEMPLATE if it doesn't exist)
 * forgot username url configuration
 
-Tests
-=====
-TODO: write tests and explain how to run them

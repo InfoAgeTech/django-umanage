@@ -5,7 +5,7 @@ from django.conf import settings
 from umanage.utils.configuration import get_required_setting
 
 
-def template_name(request):
+def common(request):
     """Common settings to put in context."""
     template_path = get_required_setting('UMANAGE_BASE_TEMPLATE')
 

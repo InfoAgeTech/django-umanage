@@ -17,6 +17,9 @@ class TokenAuthorization(AbstractTokenModel, AbstractBaseModel):
     expires = models.DateTimeField()
     token_length = 75
 
+    def __str__(self, *args, **kwargs):
+        return str(self.id)
+
     def save(self, *args, **kwargs):
 
         if not self.expires:
