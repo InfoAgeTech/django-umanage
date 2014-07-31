@@ -13,7 +13,7 @@ omit =
     */*urls.py
     *__init__.py
 include = 
-    */site-packages/*/umanage/*
+    */umanage/*
 # Regexes for lines to exclude from consideration
 exclude_lines =
     # Have to re-enable the standard pragma
