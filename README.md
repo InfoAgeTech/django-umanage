@@ -12,7 +12,9 @@ User management app for django.  This app solves the following user related work
 * [account activation](./umanage/activate_account)
     * account activation
     * account activation token expired
-    * account activation success 
+    * account activation success
+* [auth](./umanage/auth)
+    * sign out 
 * [change email address](./umanage/change_email)
     * change email address
     * change email address token expired
@@ -113,6 +115,7 @@ Configuration
         
         # If that urls.py were expanded it could look something like
         urlpatterns = patterns('',
+            url(r'', include('umanage.auth.urls')),
             url(r'', include('umanage.forgot_username.urls')),
             url(r'', include('umanage.forgot_password.urls')),
             url(r'^account', include('umanage.activate_account.urls')),

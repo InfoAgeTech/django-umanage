@@ -150,6 +150,12 @@ class UManageAuthenticatedUrlTests(UrlTestCaseMixin, AuthenticatedUserTestCase):
             url=reverse('umanage_activate_account_success')
         )
 
+    def test_umanage_logout_view(self):
+        """Test the logout view renders correctly."""
+        self.response_test_get(
+            url=reverse('umanage_logout')
+        )
+
 
 class UmanageUnauthenticatedUrlTests(UrlTestCaseMixin,
                                      UnauthenticatedUserTestCase):
