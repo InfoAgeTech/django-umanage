@@ -2,6 +2,7 @@ from __future__ import unicode_literals
 
 from django.template import Library
 from django_core.utils.loading import get_function_from_settings
+from django.conf import settings
 
 
 register = Library()
@@ -35,17 +36,20 @@ def render_umanage_form(form):
     This will default to rending the form to however the form's ``__str__``
     method is defined.
     """
-    renderer_func = get_function_from_settings('UMANAGE_FORM_RENDERER')
-    if not renderer_func:
-        return form
+    form_renderer_key = 'UMANAGE_FORM_RENDERER'
+    form_renderer_str = getattr(settings, form_renderer_key, None)
 
-    if renderer_func == 'as_table':
+    if form_renderer_str and '.' in form_renderer_str:
+        renderer_func = get_function_from_settings(form_renderer_key)
+        return renderer_func(form) if renderer_func else form
+
+    if form_renderer_str == 'as_table':
         return form.as_table()
 
-    if renderer_func == 'as_ul':
+    if form_renderer_str == 'as_ul':
         return form.as_ul()
 
-    if renderer_func == 'as_p':
+    if form_renderer_str == 'as_p':
         return form.as_p()
 
-    return renderer_func(form)
+    return form
