@@ -6,6 +6,7 @@ omit =
     */*urls.py
     *__init__.py
 include = umanage*
+source = umanage
 
 [report]
 omit = 
