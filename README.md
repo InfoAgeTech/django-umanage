@@ -141,7 +141,7 @@ Settings
                 model = MyUserModel
         
         # in settings.py
-        UMANAGE_USER_ACCOUNT_EDIT_FORM = 'MyAppUserAccountForm'
+        UMANAGE_USER_ACCOUNT_EDIT_FORM = 'my_app.forms.MyAppUserAccountForm'
 
 
 
