@@ -9,6 +9,8 @@ include = umanage*
 
 [report]
 omit = 
+    */site-packages/nose/*
+    */site-packages/django/*
     */*urls.py
     *__init__.py
 # Regexes for lines to exclude from consideration
