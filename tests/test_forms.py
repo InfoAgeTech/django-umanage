@@ -6,6 +6,7 @@ from django_core.utils.random_utils import random_alphanum
 from django_testing.user_utils import create_user
 from umanage.forgot_password.forms import ForgotPasswordForm
 from umanage.forgot_username.forms import ForgotUsernameForm
+from django.core import mail
 
 
 class UManageForgotPasswordFormsTestCase(TestCase):
@@ -33,6 +34,13 @@ class UManageForgotPasswordFormsTestCase(TestCase):
         with self.assertRaises(ValidationError):
             form.clean_username_or_email()
 
+    def test_forgot_password_form_send_email(self):
+        """Test the forgot password email is sent."""
+        user = create_user()
+        form = ForgotPasswordForm(data={'username_or_email': user.email})
+        form.is_valid()
+        form.send_email()
+
 
 class UManageForgotUsernameFormsTestCase(TestCase):
     """Test case for forgot username forms."""
@@ -55,3 +63,10 @@ class UManageForgotUsernameFormsTestCase(TestCase):
 
         with self.assertRaises(ValidationError):
             form.clean_email()
+
+    def test_forgot_username_form_send_email(self):
+        """Test the forgot username valid email"""
+        user = create_user()
+        form = ForgotUsernameForm(data={'email': user.email})
+        form.is_valid()
+        form.send_email()

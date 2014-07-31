@@ -8,6 +8,8 @@ DEBUG = False
 UMANAGE_BASE_TEMPLATE = 'base_umanage.html'
 UMANAGE_BASE_UNAUTHENTICATED_TEMPLATE = 'base_umanage_unauthenticated.html'
 UMANAGE_FROM_EMAIL = 'noreply@example.com'
+UMANAGE_SITE_ROOT_URI = 'http://somedomain.com'
+UMANAGE_SITE_NAME = 'My Site Name'
 
 # Local time zone for this installation. Choices can be found here:
 # http://en.wikipedia.org/wiki/List_of_tz_zones_by_name
