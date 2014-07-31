@@ -9,10 +9,10 @@ include = umanage*
 
 [report]
 omit = 
-    */site-packages/nose/*
-    */site-packages/django/*
     */*urls.py
     *__init__.py
+include = 
+    */site-packages/*/umanage/*
 # Regexes for lines to exclude from consideration
 exclude_lines =
     # Have to re-enable the standard pragma
