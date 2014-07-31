@@ -121,4 +121,4 @@ Configuration
             url(r'^account/token-expired/?$', TokenExpiredView.as_view(), name='umanage_token_expired'),
         )
 
-For a configuration example, look at the tests [settings.py](/InfoAgeTech/django-umanage/blob/master/tests/settings.py) file.
+For a configuration example, look at the tests [settings.py](/tests/settings.py) file.
