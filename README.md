@@ -120,3 +120,5 @@ Configuration
             url(r'^account', include('umanage.change_password.urls')),
             url(r'^account/token-expired/?$', TokenExpiredView.as_view(), name='umanage_token_expired'),
         )
+
+For a configuration example, look at the tests [settings.py](../tests/settings.py) file.
