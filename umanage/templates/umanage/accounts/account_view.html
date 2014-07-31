@@ -1,0 +1,14 @@
+{% extends 'umanage/base_umanage.html' %}
+{% load i18n umanage %}
+{% block page_title %}{% trans 'Account' %} - {% endblock %}
+
+{% block umanage_content %}
+<h1>{% trans 'Account' %}</h1>
+
+<dl class="dl-horizontal dl-umanage">
+  {% for label, val in fields_to_display %}
+    <dt>{{ label }}</dt><dd>{{ val }}</dd>
+  {% endfor %}
+</dl>
+<a class="btn btn-primary" href="{% url 'umanage_account_edit' %}">Edit</a>
+{% endblock %}

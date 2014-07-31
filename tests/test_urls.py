@@ -12,6 +12,8 @@ from umanage.models import ChangeEmailAuthorization
 from umanage.models import ForgotPasswordAuthorization
 
 from .urls import urlpatterns
+from django.test.utils import override_settings
+from umanage.exceptions import UManageSettingImproperlyConfigured
 
 
 User = get_user_model()
@@ -105,22 +107,16 @@ class UManageAuthenticatedUrlTests(UrlTestCaseMixin, AuthenticatedUserTestCase):
 
     def test_umanage_change_email_expired_view(self):
         """Test the change email expired url to ensure it renders correctly."""
-        self.response_test_get(
-            url=reverse('umanage_change_email_expired')
-        )
+        self.response_test_get(url=reverse('umanage_change_email_expired'))
 
     def test_umanage_change_password_view(self):
         """Test the change password url to ensure it renders correctly."""
-        self.response_test_get(
-            url=reverse('umanage_change_password')
-        )
+        self.response_test_get(url=reverse('umanage_change_password'))
 
     def test_umanage_change_password_success_view(self):
         """Test the change password success url to ensure it renders correctly.
         """
-        self.response_test_get(
-            url=reverse('umanage_change_password_success')
-        )
+        self.response_test_get(url=reverse('umanage_change_password_success'))
 
     def test_umanage_activate_account_view(self):
         """Test the activate account url to ensure it renders correctly."""
@@ -146,15 +142,35 @@ class UManageAuthenticatedUrlTests(UrlTestCaseMixin, AuthenticatedUserTestCase):
         """Test the activate account success url to ensure it renders
         correctly.
         """
-        self.response_test_get(
-            url=reverse('umanage_activate_account_success')
-        )
+        self.response_test_get(url=reverse('umanage_activate_account_success'))
 
     def test_umanage_logout_view(self):
         """Test the logout view renders correctly."""
-        self.response_test_get(
-            url=reverse('umanage_logout')
-        )
+        self.response_test_get(url=reverse('umanage_logout'))
+
+    def test_umanage_account_view_view(self):
+        """Test the account view renders correctly."""
+        self.response_test_get(url=reverse('umanage_account_view'))
+
+    @override_settings(UMANAGE_USER_ACCOUNT_DISPLAY_FIELDS=('non', 'existent'))
+    def test_umanage_account_view_display_account_fields_imporperly_set(self):
+        """Test that the error is thrown when setting is improperly set for
+        display account fields.
+        """
+        with self.assertRaises(UManageSettingImproperlyConfigured):
+            self.response_test_get(url=reverse('umanage_account_view'))
+
+    def test_umanage_account_edit_view(self):
+        """Test the account edit renders correctly."""
+        self.response_test_get(url=reverse('umanage_account_edit'))
+
+    @override_settings(UMANAGE_USER_ACCOUNT_EDIT_FORM='path.non.Existent')
+    def test_umanage_account_edit_form_imporperly_set(self):
+        """Test that the error is thrown when setting is improperly set for
+        account edit form.
+        """
+        with self.assertRaises(UManageSettingImproperlyConfigured):
+            self.response_test_get(url=reverse('umanage_account_edit'))
 
 
 class UmanageUnauthenticatedUrlTests(UrlTestCaseMixin,

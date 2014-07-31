@@ -1,8 +1,7 @@
 from __future__ import unicode_literals
 
 from django.conf import settings
-
-from umanage.exceptions import UManageSettingImproperlyConfigured
+from umanage.exceptions import UManageRequiredSettingImproperlyConfigured
 
 
 def get_required_setting(settings_key, default=None):
@@ -15,4 +14,4 @@ def get_required_setting(settings_key, default=None):
 
         return getattr(settings, settings_key, default)
     except AttributeError as e:
-        raise UManageSettingImproperlyConfigured(settings_key=settings_key)
+        raise UManageRequiredSettingImproperlyConfigured(settings_key=settings_key)
