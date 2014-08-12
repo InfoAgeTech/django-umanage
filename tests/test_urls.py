@@ -2,18 +2,18 @@ from __future__ import unicode_literals
 
 from django.contrib.auth import get_user_model
 from django.core.urlresolvers import reverse
+from django.test.utils import override_settings
 from django_core.utils.random_utils import random_alphanum
 from django_testing.testcases.auth import AuthenticatedUserTestCase
 from django_testing.testcases.auth import UnauthenticatedUserTestCase
 from django_testing.testcases.urls import UrlTestCaseMixin
 from django_testing.user_utils import create_user
+from umanage.exceptions import UManageSettingImproperlyConfigured
 from umanage.models import AccountActivationAuthorization
 from umanage.models import ChangeEmailAuthorization
 from umanage.models import ForgotPasswordAuthorization
 
 from .urls import urlpatterns
-from django.test.utils import override_settings
-from umanage.exceptions import UManageSettingImproperlyConfigured
 
 
 User = get_user_model()
