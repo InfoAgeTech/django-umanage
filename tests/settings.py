@@ -53,6 +53,7 @@ TEMPLATE_CONTEXT_PROCESSORS = (
 
 SITE_ROOT = os.path.join(os.path.dirname(os.path.realpath(__file__)), '../')
 TEMPLATE_DIRS = (
+    os.path.join(SITE_ROOT, 'tests/templates'),
     os.path.join(SITE_ROOT, 'umanage/templates'),
 )
 
