@@ -26,7 +26,6 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.humanize',
     'django_core',
-    'django_nose',
     'tests',
     'umanage',
 )
