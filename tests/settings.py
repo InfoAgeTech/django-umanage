@@ -11,7 +11,6 @@ ROOT_URLCONF = 'urls'
 SECRET_KEY = '12345abcd'
 SITE_ROOT = os.path.join(os.path.dirname(os.path.realpath(__file__)), '../')
 SITE_ID = 1
-TEST_RUNNER = 'django_nose.NoseTestSuiteRunner'
 TIME_ZONE = 'UTC'
 USE_I18N = True
 
@@ -57,6 +56,3 @@ DATABASES = {
         'NAME': here('test_db.db')
     }
 }
-
-if 'test' in sys.argv:
-    NOSE_ARGS = ('--nocapture', '--with-doctest', '--testmatch=^test')

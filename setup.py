@@ -33,12 +33,9 @@ setup(
     include_package_data=True,
     zip_safe=False,
     setup_requires=[
-        'django >= 1.5.8',
+        'django >= 1.6',
         'markdown'
     ],
     test_suite='nose.collector',
-    tests_require=[
-        'django_nose'
-    ],
     classifiers=classifiers
 )

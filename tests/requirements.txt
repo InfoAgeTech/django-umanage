@@ -1,4 +1,3 @@
-django_nose
 markdown
 mock
 https://github.com/InfoAgeTech/django-core/tarball/master
