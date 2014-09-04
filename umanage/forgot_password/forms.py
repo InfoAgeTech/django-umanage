@@ -12,9 +12,6 @@ from ..models import ForgotPasswordAuthorization
 from .emails import send_forgot_password_email
 
 
-User = get_user_model()
-
-
 class ForgotPasswordForm(forms.Form):
     """Form for forgot password."""
     username_or_email = forms.CharField(max_length=100)
@@ -23,6 +20,8 @@ class ForgotPasswordForm(forms.Form):
 
         username_or_email = self.cleaned_data.get('username_or_email', '')
         username_or_email = username_or_email.strip()
+
+        User = get_user_model()
 
         try:
             if is_valid_email(username_or_email):

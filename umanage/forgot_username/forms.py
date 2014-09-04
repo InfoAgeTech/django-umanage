@@ -8,15 +8,14 @@ from django.utils.translation import ugettext as _
 from umanage.forgot_username.emails import send_change_forgot_username_email
 
 
-User = get_user_model()
-
-
 class ForgotUsernameForm(forms.Form):
     """Form for forgot password."""
     email = forms.EmailField()
 
     def clean_email(self):
         email = self.cleaned_data.get('email')
+
+        User = get_user_model()
 
         try:
             user = User.objects.get(email__iexact=email)

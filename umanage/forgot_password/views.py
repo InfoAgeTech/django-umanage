@@ -13,9 +13,6 @@ from .forms import ForgotPasswordForm
 from .forms import UManageSetPasswordForm
 
 
-User = get_user_model()
-
-
 class ForgotPasswordView(FormView):
 
     template_name = 'umanage/forgot_password/forgot_password.html'
@@ -51,6 +48,8 @@ class ForgotPasswordChangePasswordView(AuthorizationTokenRequiredViewMixin,
     def get_authorization_user(self):
         if self.authorization_user is not None:
             return self.authorization_user
+
+        User = get_user_model()
 
         try:
             user = User.objects.get(username=self.kwargs.get('username'))

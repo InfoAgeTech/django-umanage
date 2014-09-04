@@ -10,9 +10,6 @@ from ..mixins.views import AuthorizationTokenRequiredViewMixin
 from ..models import AccountActivationAuthorization
 
 
-User = get_user_model()
-
-
 class ActivateAccountView(AuthorizationTokenRequiredViewMixin, View):
 
     authorization_class = AccountActivationAuthorization
@@ -35,6 +32,7 @@ class ActivateAccountView(AuthorizationTokenRequiredViewMixin, View):
         return redirect('umanage_activate_account_success')
 
     def get_authorization_user(self):
+        User = get_user_model()
         try:
             user = User.objects.get(username=self.kwargs.get('username'))
         except User.DoesNotExist as e:

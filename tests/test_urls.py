@@ -16,8 +16,6 @@ from umanage.models import ForgotPasswordAuthorization
 from .urls import urlpatterns
 
 
-User = get_user_model()
-
 UNAUTHENTICATED_URL_NAMES = [
     'umanage_forgot_password',
     'umanage_forgot_password_change_password',
@@ -75,7 +73,7 @@ class UManageAuthenticatedUrlTests(UrlTestCaseMixin, AuthenticatedUserTestCase):
             expected_status_code=302
         )
 
-        test_user = User.objects.get(id=self.user.id)
+        test_user = get_user_model().objects.get(id=self.user.id)
         self.assertEqual(test_user.email, new_email_address)
 
     def test_umanage_activate_account_expired_view(self):
@@ -135,7 +133,7 @@ class UManageAuthenticatedUrlTests(UrlTestCaseMixin, AuthenticatedUserTestCase):
             expected_status_code=302
         )
 
-        test_user = User.objects.get(id=test_user.id)
+        test_user = get_user_model().objects.get(id=test_user.id)
         self.assertTrue(test_user.is_active)
 
     def test_umanage_activate_account_success_view(self):

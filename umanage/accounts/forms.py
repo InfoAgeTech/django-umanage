@@ -7,15 +7,12 @@ from django.utils.translation import ugettext as _
 from django_core.forms.widgets import ReadonlyWidget
 
 
-User = get_user_model()
-
-
 class UserAccountForm(forms.ModelForm):
     """Form for editing a user account."""
     email = forms.EmailField(label=_('Email Address'), widget=ReadonlyWidget)
 
     class Meta:
-        model = User
+        model = get_user_model()
         fields = ('first_name', 'last_name', 'email')
 
     def __init__(self, *args, **kwargs):
