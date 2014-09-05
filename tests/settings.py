@@ -1,7 +1,6 @@
 from __future__ import unicode_literals
 
 import os
-import sys
 
 DEBUG = False
 
@@ -26,7 +25,6 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.humanize',
     'django_core',
-    'tests',
     'umanage',
 )
 
