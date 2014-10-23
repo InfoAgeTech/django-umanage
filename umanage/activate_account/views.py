@@ -1,5 +1,6 @@
 from __future__ import unicode_literals
 
+from django.conf import settings
 from django.contrib.auth import get_user_model
 from django.http.response import Http404
 from django.shortcuts import redirect
@@ -45,6 +46,12 @@ class ActivateAccountView(AuthorizationTokenRequiredViewMixin, View):
 class ActivateAccountSuccessView(TemplateView):
 
     template_name = 'umanage/activate_account/activate_account_success.html'
+
+    def get_context_data(self, **kwargs):
+        context = super(ActivateAccountSuccessView,
+                         self).get_context_data(**kwargs)
+        context['login_url'] = getattr(settings, 'LOGIN_URL', '/login')
+        return context
 
 
 class ActivateAccountExpiredView(TemplateView):
