@@ -12,9 +12,17 @@ from django_core.db.models.mixins.tokens import AbstractTokenModel
 
 @python_2_unicode_compatible
 class TokenAuthorization(AbstractTokenModel, AbstractBaseModel):
-    """Model that provides a token for authorization purposes."""
+    """Model that provides a token for authorization purposes.
+    
+    Fields:
+    
+    * expires: the date and time when the token expires
+    * reason: a reason the token was generated.  This is preferably a constant
+        but can be any string value.
+    """
     new_email_address = models.EmailField(blank=True, null=True)
     expires = models.DateTimeField()
+    reason = models.CharField(max_length=50, blank=True, null=True)
     token_length = 75
 
     def __str__(self, *args, **kwargs):
