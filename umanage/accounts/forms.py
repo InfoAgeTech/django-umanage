@@ -9,7 +9,9 @@ from django_core.forms.widgets import ReadonlyWidget
 
 class UserAccountForm(forms.ModelForm):
     """Form for editing a user account."""
-    email = forms.EmailField(label=_('Email Address'), widget=ReadonlyWidget)
+    email = forms.EmailField(label=_('Email Address'),
+                             widget=ReadonlyWidget,
+                             required=False)
 
     class Meta:
         model = get_user_model()
@@ -21,3 +23,7 @@ class UserAccountForm(forms.ModelForm):
             reverse('umanage_change_email'),
             _('change')
         )
+
+    def clean_email(self):
+        """Email is readonly."""
+        return self.instance.email

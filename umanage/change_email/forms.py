@@ -16,7 +16,8 @@ class ChangeEmailForm(UserAuthorizationRequiredForm):
                                    "match exactly. Please enter it again."),
     })
     current_email = forms.EmailField(label=_('Current Email'),
-                                     max_length=100, widget=ReadonlyWidget)
+                                     max_length=100, widget=ReadonlyWidget,
+                                     required=False)
     new_email = forms.EmailField(label=_('New Email'))
     new_email_confirm = forms.EmailField(label=_('New Email Confirm'))
 

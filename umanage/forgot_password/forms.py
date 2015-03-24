@@ -46,6 +46,9 @@ class ForgotPasswordForm(forms.Form):
 
 class UManageSetPasswordForm(SetPasswordForm):
 
+    next = forms.CharField(max_length=200, required=False,
+                           widget=forms.HiddenInput)
+
     def __init__(self, *args, **kwargs):
         super(UManageSetPasswordForm, self).__init__(*args, **kwargs)
         self.fields['new_password1'].validators.append(validate_password_strength)
