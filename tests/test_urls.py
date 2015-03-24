@@ -2,10 +2,10 @@ from __future__ import unicode_literals
 
 from django.contrib.auth import get_user_model
 from django.core.urlresolvers import reverse
+from django.test.testcases import TestCase
 from django.test.utils import override_settings
 from django_core.utils.random_utils import random_alphanum
 from django_testing.testcases.auth import AuthenticatedUserTestCase
-from django_testing.testcases.auth import UnauthenticatedUserTestCase
 from django_testing.testcases.urls import UrlTestCaseMixin
 from django_testing.user_utils import create_user
 from umanage.exceptions import UManageSettingImproperlyConfigured
@@ -57,6 +57,12 @@ class UManageAuthenticatedUrlTests(UrlTestCaseMixin, AuthenticatedUserTestCase):
         """Test the change email url to ensure it renders correctly."""
         self.response_test_get(
             url=reverse('umanage_change_email')
+        )
+
+    def test_umanage_set_password_view(self):
+        """Test the set password url to ensure it renders correctly."""
+        self.response_test_get(
+            url=reverse('umanage_set_password')
         )
 
     def test_umanage_change_email_activation_view(self):
@@ -171,13 +177,17 @@ class UManageAuthenticatedUrlTests(UrlTestCaseMixin, AuthenticatedUserTestCase):
             self.response_test_get(url=reverse('umanage_account_edit'))
 
 
-class UmanageUnauthenticatedUrlTests(UrlTestCaseMixin,
-                                     UnauthenticatedUserTestCase):
+class UmanageUnauthenticatedUrlTests(UrlTestCaseMixin, TestCase):
     """Test case for ensuring unauthenticated umanage urls return a correct
     response.
     """
 
     url_names = UNAUTHENTICATED_URL_NAMES
+
+    @classmethod
+    def setUpClass(cls):
+        super(UmanageUnauthenticatedUrlTests, cls).setUpClass()
+        cls.user = create_user()
 
     def test_umanage_forgot_password_view(self):
         """Test the forgot password url renders."""
