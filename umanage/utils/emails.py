@@ -10,11 +10,17 @@ from umanage.utils.configuration import get_required_setting
 
 
 def umanage_send_email(to_user, subject, markdown_template=None,
-                       text_template=None, html_template=None, from_email=None,
-                       fail_silently=False, context=None):
-    """Sends an email to a user."""
-    if not to_user.email:
-        return
+                       text_template=None, html_template=None, to_email=None,
+                       from_email=None, fail_silently=False, context=None):
+    """Sends an email to a user.
+
+    :param to_email: the email address to send the email to.  If an email needs
+        to be sent to a user to a different email than what's currently
+        registered (as does with the change email flow), the email will be sent
+        to this email address.
+    """
+    if not to_user.email and not to_email:
+        return None
 
     if not from_email:
         from_email = get_required_setting('UMANAGE_FROM_EMAIL')
@@ -42,7 +48,7 @@ def umanage_send_email(to_user, subject, markdown_template=None,
     msg = EmailMultiAlternatives(subject=subject,
                                  body=text_content,
                                  from_email=from_email,
-                                 to=[to_user.email])
+                                 to=[to_email or to_user.email])
     msg.attach_alternative(html_content, 'text/html')
     msg.send()
 

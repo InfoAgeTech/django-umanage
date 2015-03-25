@@ -43,7 +43,9 @@ class ChangeEmailForm(UserAuthorizationRequiredForm):
         return new_email_confirm
 
     def send_email(self):
-        """Sends the necessary emails and returns the ChangeEmail object."""
+        """Sends the necessary emails and returns the ChangeEmail object. This
+        method assumes the form has already made a call to ``.clean(...)``.
+        """
         authorization = ChangeEmailAuthorization.objects.create(
             new_email_address=self.cleaned_data.get('new_email'),
             created_user=self.user
@@ -54,6 +56,7 @@ class ChangeEmailForm(UserAuthorizationRequiredForm):
         )
         send_change_email_activation_email(
             to_user=self.user,
+            to_email=self.cleaned_data.get('new_email'),
             authorization=authorization
         )
         return authorization
