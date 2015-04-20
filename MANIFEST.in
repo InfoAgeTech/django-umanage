@@ -1,4 +1,8 @@
 include LICENSE
 include *.md
 include setup.py
-include umanage/*
+include MANIFEST.in
+recursive-include umanage *
+recursive-exclude tests * 
+recursive-exclude * __pycache__
+recursive-exclude * *.py[co]
