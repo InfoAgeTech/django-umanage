@@ -47,7 +47,7 @@ class ChangeEmailForm(UserAuthorizationRequiredForm):
         method assumes the form has already made a call to ``.clean(...)``.
         """
         authorization = ChangeEmailAuthorization.objects.create(
-            new_email_address=self.cleaned_data.get('new_email'),
+            email_address=self.cleaned_data.get('new_email'),
             created_user=self.user
         )
         send_change_email_notice_email(

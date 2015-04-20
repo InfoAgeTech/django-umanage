@@ -5,9 +5,9 @@ from django.shortcuts import redirect
 from django.views.generic.base import TemplateView
 from django.views.generic.base import View
 from django.views.generic.edit import FormView
+from django_core.auth.views import AuthorizationTokenRequiredViewMixin
 from django_core.views.mixins.auth import LoginRequiredViewMixin
 
-from ..mixins.views import AuthorizationTokenRequiredViewMixin
 from ..models import ChangeEmailAuthorization
 from .forms import ChangeEmailForm
 
@@ -51,7 +51,7 @@ class ChangeEmailActivationView(LoginRequiredViewMixin,
     def get(self, request, *args, **kwargs):
 
         # It's a valid change email object, update the user's email
-        self.request.user.email = self.authorization.new_email_address
+        self.request.user.email = self.authorization.email_address
         self.request.user.save()
 
         # Expire the change email token so it's no longer valid.

@@ -6,8 +6,8 @@ from django.http.response import Http404
 from django.shortcuts import redirect
 from django.views.generic.base import TemplateView
 from django.views.generic.edit import FormView
+from django_core.auth.views import AuthorizationTokenRequiredViewMixin
 
-from ..mixins.views import AuthorizationTokenRequiredViewMixin
 from ..models import ForgotPasswordAuthorization
 from .forms import ForgotPasswordForm
 from .forms import UManageSetPasswordForm

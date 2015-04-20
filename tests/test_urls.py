@@ -72,7 +72,7 @@ class UManageAuthenticatedUrlTests(UrlTestCaseMixin, AuthenticatedUserTestCase):
                                                  random_alphanum(5))
         authorization = ChangeEmailAuthorization.objects.create(
             created_user=self.user,
-            new_email_address=new_email_address
+            email_address=new_email_address
         )
         self.response_test_get(
             url=authorization.get_absolute_url(),

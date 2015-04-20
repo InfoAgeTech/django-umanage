@@ -10,9 +10,9 @@
 <h1>{% trans 'Account Activated' %}</h1>
 <p>{% trans "Your account has been successfully activated!" %}</p>
 {% if user.is_authenticated %}
-<p><a href="/">Go to home page</a></p>
+<p><a href="/" class="btn btn-primary">Go to home page</a></p>
 {% else %}
-<p><a href="{{ login_url }}">Login</a></p>
+<p><a href="{{ login_url }}" class="btn btn-primary">Login</a></p>
 {% endif %}
 
 {% endblock %}

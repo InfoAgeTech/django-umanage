@@ -6,7 +6,6 @@ from django_core.utils.random_utils import random_alphanum
 from django_testing.user_utils import create_user
 from umanage.forgot_password.forms import ForgotPasswordForm
 from umanage.forgot_username.forms import ForgotUsernameForm
-from django.core import mail
 
 
 class UManageForgotPasswordFormsTestCase(TestCase):
