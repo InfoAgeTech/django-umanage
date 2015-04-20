@@ -4,7 +4,6 @@ import os
 
 from setuptools import find_packages
 from setuptools import setup
-from umanage import APP_URL
 
 
 classifiers = [
@@ -22,18 +21,19 @@ README = open(os.path.join(os.path.dirname(__file__), 'README.md')).read()
 
 setup(
     name='django-umanage',
-    version='0.0.1',
+    version='1.0.0',
     description='Django user management app for django',
     long_description=README,
     author='Troy Grosfield',
     maintainer='Troy Grosfield',
-    url=APP_URL,
+    url='https://github.com/infoagetech/django-umanage',
     license='MIT',
     packages=find_packages(),
     include_package_data=True,
     zip_safe=False,
     setup_requires=[
-        'django >= 1.6',
+        'django >= 1.7',
+        'django-core >= 1.0',
         'markdown'
     ],
     test_suite='nose.collector',
