@@ -23,7 +23,7 @@ README = open(os.path.join(os.path.dirname(__file__), 'README.md')).read()
 
 setup(
     name='django-umanage',
-    version='1.1.0',
+    version='1.1.1',
     description='Django user management app for django',
     author='Troy Grosfield',
     maintainer='Troy Grosfield',
@@ -34,7 +34,7 @@ setup(
     zip_safe=False,
     setup_requires=[
         'django >= 1.7',
-        'django-core >= 1.1.0',
+        'django-core >= 1.4.0',
         'markdown'
     ],
     test_suite='nose.collector',
