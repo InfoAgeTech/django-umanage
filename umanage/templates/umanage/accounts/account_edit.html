@@ -9,7 +9,7 @@
 {% block umanage_content %}
 <h1>{% trans 'Edit Account' %}</h1>
 
-<form method="post" action="{% url 'umanage_account_edit' %}" class="form-umanage form-horizontal">
+<form method="post" action="{% url 'umanage_account_edit' %}" class="form-umanage form-horizontal" enctype="multipart/form-data">
     {% csrf_token %}
     {{ form|render_umanage_form }}
     <div class="form-group umanage-button-container">

@@ -10,6 +10,7 @@ from django_core.views.mixins.auth import LoginRequiredViewMixin
 
 from ..exceptions import UManageSettingImproperlyConfigured
 from .forms import UserAccountForm
+from inspect import isfunction
 
 
 class AccountView(LoginRequiredViewMixin, TemplateView):
@@ -24,16 +25,29 @@ class AccountView(LoginRequiredViewMixin, TemplateView):
                                          settings_key,
                                          ('first_name', 'last_name', 'email'))
 
-        if not isinstance(user_fields_to_display, tuple):
+        if not isinstance(user_fields_to_display, (tuple, list)):
             raise UManageSettingImproperlyConfigured(settings_key)
 
         fields_to_display = []
 
         for field_name in user_fields_to_display:
+            label = None
+            if isinstance(field_name, (list, tuple)):
+                label = field_name[0]
+                field_name = field_name[1]
+
             try:
                 val = getattr(user, field_name)
-                label = user._meta.get_field_by_name(field_name)[0].verbose_name
-            except:
+
+                if isfunction(val):
+                    # it's a function, call the function and get the results
+                    val = val()
+
+                if not label:
+                    field = user._meta.get_field_by_name(field_name)[0]
+                    label = field.verbose_name
+
+            except AttributeError:
                 raise UManageSettingImproperlyConfigured(
                     settings_key,
                     message=_('"{0}" is not a valid field on the User model. '
