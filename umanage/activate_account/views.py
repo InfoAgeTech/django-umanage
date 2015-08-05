@@ -6,12 +6,12 @@ from django.http.response import Http404
 from django.shortcuts import redirect
 from django.views.generic.base import TemplateView
 from django.views.generic.base import View
-from django_core.auth.views import AuthorizationTokenRequiredViewMixin
+from umanage.mixins.views import UmanageAuthorizationTokenRequiredViewMixin
 
 from ..models import AccountActivationAuthorization
 
 
-class ActivateAccountView(AuthorizationTokenRequiredViewMixin, View):
+class ActivateAccountView(UmanageAuthorizationTokenRequiredViewMixin, View):
 
     authorization_class = AccountActivationAuthorization
 

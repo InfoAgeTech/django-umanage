@@ -5,8 +5,8 @@ from django.shortcuts import redirect
 from django.views.generic.base import TemplateView
 from django.views.generic.base import View
 from django.views.generic.edit import FormView
-from django_core.auth.views import AuthorizationTokenRequiredViewMixin
 from django_core.views.mixins.auth import LoginRequiredViewMixin
+from umanage.mixins.views import UmanageAuthorizationTokenRequiredViewMixin
 
 from ..models import ChangeEmailAuthorization
 from .forms import ChangeEmailForm
@@ -44,7 +44,8 @@ class ChangeEmailSuccessView(LoginRequiredViewMixin, TemplateView):
 
 
 class ChangeEmailActivationView(LoginRequiredViewMixin,
-                                AuthorizationTokenRequiredViewMixin, View):
+                                UmanageAuthorizationTokenRequiredViewMixin,
+                                View):
 
     authorization_class = ChangeEmailAuthorization
 

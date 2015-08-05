@@ -6,7 +6,7 @@ from django.http.response import Http404
 from django.shortcuts import redirect
 from django.views.generic.base import TemplateView
 from django.views.generic.edit import FormView
-from django_core.auth.views import AuthorizationTokenRequiredViewMixin
+from umanage.mixins.views import UmanageAuthorizationTokenRequiredViewMixin
 
 from ..models import ForgotPasswordAuthorization
 from .forms import ForgotPasswordForm
@@ -38,7 +38,7 @@ class ForgotPasswordSentView(TemplateView):
     template_name = 'umanage/forgot_password/forgot_password_sent.html'
 
 
-class ForgotPasswordChangePasswordView(AuthorizationTokenRequiredViewMixin,
+class ForgotPasswordChangePasswordView(UmanageAuthorizationTokenRequiredViewMixin,
                                        FormView):
 
     template_name = 'umanage/forgot_password/forgot_password_change_password.html'
