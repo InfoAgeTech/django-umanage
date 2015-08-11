@@ -9,7 +9,7 @@ def common(request):
     """Common settings to put in context."""
     template_path = get_required_setting('UMANAGE_BASE_TEMPLATE')
 
-    if not request.user.is_authenticated():
+    if not hasattr(request, 'user') or not request.user.is_authenticated():
         template_path = getattr(settings,
                                 'UMANAGE_BASE_UNAUTHENTICATED_TEMPLATE',
                                 template_path)
