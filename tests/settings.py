@@ -1,5 +1,3 @@
-from __future__ import unicode_literals
-
 import os
 
 DEBUG = False
@@ -34,8 +32,8 @@ MIDDLEWARE_CLASSES = (
 )
 
 TEMPLATE_CONTEXT_PROCESSORS = (
-    'django.core.context_processors.request',
-    'django.core.context_processors.media',
+    'django.template.context_processors.request',
+    'django.template.context_processors.media',
     'django.contrib.auth.context_processors.auth',
     'umanage.context_processors.common',
 )

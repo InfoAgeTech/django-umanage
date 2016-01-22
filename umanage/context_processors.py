@@ -1,5 +1,3 @@
-from __future__ import unicode_literals
-
 from django.conf import settings
 
 from umanage.utils.configuration import get_required_setting

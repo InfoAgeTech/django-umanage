@@ -44,7 +44,7 @@ class AccountView(LoginRequiredViewMixin, TemplateView):
                     val = val()
 
                 if not label:
-                    field = user._meta.get_field_by_name(field_name)[0]
+                    field = user._meta.get_field(field_name)
                     label = field.verbose_name
 
             except AttributeError:
