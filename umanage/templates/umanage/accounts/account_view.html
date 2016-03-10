@@ -7,7 +7,7 @@
 
 <dl class="dl-horizontal dl-umanage">
   {% for label, val in fields_to_display %}
-    <dt>{{ label }}</dt><dd>{{ val }}</dd>
+    <dt>{{ label }}</dt><dd>{{ val|linebreaks }}</dd>
   {% endfor %}
 </dl>
 <a class="btn btn-primary" href="{% url 'umanage_account_edit' %}">Edit</a>
