@@ -81,6 +81,7 @@ class AccountEditView(LoginRequiredViewMixin, FormView):
     def get_form_kwargs(self):
         kwargs = super(AccountEditView, self).get_form_kwargs()
         kwargs['instance'] = self.request.user
+        kwargs['request'] = self.request
         return kwargs
 
     def form_valid(self, form):
