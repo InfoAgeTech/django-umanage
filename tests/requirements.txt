@@ -1,4 +1,4 @@
 markdown
 mock
-django-core
+https://github.com/InfoAgeTech/django-core/tarball/master
 https://github.com/InfoAgeTech/django-testing/tarball/master
